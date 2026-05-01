@@ -1,0 +1,17 @@
+[project]
+name = "final"
+version = "0.1.0"
+description = "RAG + function-calling agent for Ecolab water intelligence"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pypdf>=6.10.2",
+    "sentence-transformers>=3.0",
+    "chromadb>=0.5",
+    "openai>=1.30",
+    "python-dotenv>=1.0",
+    "requests>=2.31",
+    "streamlit>=1.35",
+    "rich>=13.0",
+    "tiktoken>=0.7",
+]
