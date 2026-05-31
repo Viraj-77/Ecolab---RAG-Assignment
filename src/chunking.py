@@ -1,13 +1,10 @@
 import tiktoken
-from src.llm_client import PROFILE
 
-_enc = tiktoken.get_encoding("cl100k_base")
+_enc = tiktoken.get_encoding("cl100k_base") #c1100k is a tokenizer called to break down text into tokens and it has rules on how to do it  
+#_enc is a variable we declared to store rules
 
-# nomic-embed-text default Ollama context is 2048 tokens (BERT tokenizer ≠ cl100k);
-# 400 cl100k tokens gives a comfortable margin. Cloud embedder handles 800 fine.
-CHUNK_TOKENS = 384 if PROFILE == "local" else 800
-OVERLAP_TOKENS = 48 if PROFILE == "local" else 100
-MAX_CHARS_LOCAL = 1500
+CHUNK_TOKENS = 800   # 600 works/chunk
+OVERLAP_TOKENS = 100  # 12.5% overlap 
 
 
 def split_text(text: str, chunk_size: int = CHUNK_TOKENS, overlap: int = OVERLAP_TOKENS) -> list[str]: #name says it all
@@ -22,10 +19,9 @@ def split_text(text: str, chunk_size: int = CHUNK_TOKENS, overlap: int = OVERLAP
     return chunks
 
 
-def chunk_document(doc: dict) -> list[dict]:
+def chunk_document(doc: dict) -> list[dict]: #takes data in dict and returns chunks in list add id along with source and text
+  
     raw_chunks = split_text(doc["text"])
-    if PROFILE == "local":
-        raw_chunks = [c[:MAX_CHARS_LOCAL] for c in raw_chunks]
     return [
         {"source": doc["source"], "chunk_id": i, "text": chunk}
         for i, chunk in enumerate(raw_chunks)
