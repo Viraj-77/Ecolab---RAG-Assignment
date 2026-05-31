@@ -1,6 +1,5 @@
 import streamlit as st
-from src.rag_pipeline import chat, SYSTEM_PROMPT, LOCAL_SYSTEM_PROMPT, TOOLS_ENABLED
-SYSTEM_PROMPT = SYSTEM_PROMPT if TOOLS_ENABLED else LOCAL_SYSTEM_PROMPT
+from src.rag_pipeline import chat, SYSTEM_PROMPT
 from src.conversational_memory import ConversationMemory
 
 st.set_page_config(page_title="RAG")

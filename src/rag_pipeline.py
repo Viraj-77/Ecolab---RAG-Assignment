@@ -1,15 +1,19 @@
-from src.llm_client import get_chat_client, CHAT_MODEL, PROFILE
+import os
+from dotenv import load_dotenv
+from openai import AzureOpenAI
+
 from src.semantic_search import retrieve
 from src.conversational_memory import ConversationMemory
 from src.followup_query import ALL_TOOLS, execute_tool
 
-client = get_chat_client()
-
-# gemma3n:e4b on Ollama does not support the tools parameter at the API layer.
-# When running the local profile we drop tool calling entirely; the agent becomes
-# RAG-only. The cloud profile keeps the full tool-call loop.
-TOOLS_ENABLED = PROFILE == "cloud"
-
+load_dotenv()
+#this is taken from the .md file from teams
+client = AzureOpenAI(
+    api_version="2024-12-01-preview",
+    azure_endpoint="https://cds-ds-openai-001-x.openai.azure.com/",
+    api_key=os.environ["AZURE_OPENAI_API_KEY"],
+)
+#passed to llm so it acts like the prompt, we are giving the llm a role
 SYSTEM_PROMPT = """You are an Ecolab assistant.
 You have access to a knowledge base of water treatment, hygiene, and sustainability documents,
 and a tool that fetches live USGS water quality measurements by location.
@@ -19,15 +23,9 @@ Use get_water_quality for: real readings, current data, or location specific wat
 Use both together when a question needs context from documents AND live measurements.
 """
 
-LOCAL_SYSTEM_PROMPT = """You are an Ecolab assistant.
-You have access to a knowledge base of water treatment, hygiene, and sustainability documents.
-Answer using only the provided context. If the question requires live water quality measurements
-(real-time USGS readings) or other data not present in the context, state clearly that you cannot
-fetch live data in this configuration.
-"""
-
 
 def chat(memory: ConversationMemory, user_message: str) -> str:
+    #retrieve relevant document chunks
     chunks = retrieve(user_message)
     if chunks:
         context = "\n\n".join(f"[{c['source']}]\n{c['text']}" for c in chunks)
@@ -37,25 +35,27 @@ def chat(memory: ConversationMemory, user_message: str) -> str:
 
     memory.add("user", augmented)
 
-    while True:
-        kwargs = {
-            "model": CHAT_MODEL,
-            "messages": memory.messages(),
-        }
-        if TOOLS_ENABLED:
-            kwargs["tools"] = ALL_TOOLS
-            kwargs["tool_choice"] = "auto"
 
-        response = client.chat.completions.create(**kwargs)
+    #the model will request a tool if required then we execute it and call the model again.
+    #qe keep looping until the model returns a plain text answer.
+    while True:
+        response = client.chat.completions.create(
+            model="gpt-5.4-nano",   # deployment name from the spec
+            messages=memory.messages(),
+            tools=ALL_TOOLS,
+            tool_choice="auto",
+        )
         msg = response.choices[0].message
 
-        if TOOLS_ENABLED and msg.tool_calls:
+        if msg.tool_calls:
+            #model wants to call a tool — execute each one and append results
             memory.add("assistant", msg.content or "", tool_calls=msg.tool_calls)
             for tc in msg.tool_calls:
                 result = execute_tool(tc.function.name, tc.function.arguments)
-                memory.add_tool_message(tc.id, result)
-            continue
+                memory.add_tool_result(tc.id, result)
+            continue  #go back to the top and call the model again
 
+        #no tool call — this is the final answer
         answer = msg.content or ""
         memory.add("assistant", answer)
         return answer
