@@ -1,22 +1,13 @@
-import os
-from dotenv import load_dotenv
-from openai import AzureOpenAI
+from src.llm_client import get_embed_client, EMBED_MODEL
 from src.chromadb_setup import get_collection
 
-load_dotenv()
-#again taken from .md file from teams
-client = AzureOpenAI(
-    api_version="2024-12-01-preview",
-    azure_endpoint="https://cds-ds-openai-001-x.openai.azure.com/",
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-)
+client = get_embed_client()
 
-TOP_K = 4  #number of chunks to pull per query
+TOP_K = 4
 
 def retrieve(query: str) -> list[dict]:
-    #embed the query, then find the closest chunks in the vector store
     vec = client.embeddings.create(
-        model="text-embedding-3-small",
+        model=EMBED_MODEL,
         input=query,
     ).data[0].embedding
 
