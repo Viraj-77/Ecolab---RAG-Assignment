@@ -1,6 +1,6 @@
 # Ecolab Water Intelligence RAG Agent
 
-**Authors:** K, Ajay Kumar and C, Vijay Vittal and Viraj D Talati
+**Authors:** Viraj D Talati
 **Cohort:** MTech-Interns-2026 LLM Capability build office
 
 ## Overview
