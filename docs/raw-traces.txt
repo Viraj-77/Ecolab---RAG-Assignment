@@ -1,0 +1,203 @@
+Person 2 (Tester) — raw traces
+================================
+Captured: 2026-06-01
+Server:   radar-mcp v1.27.2 (mcp SDK), protocol 2025-11-25
+Driver:   official `mcp` Python SDK stdio client (MCP Inspector substitute —
+          no Node available locally; see test_harness.py for the source).
+Server start command: `cd mcp-server && python -m src.server` over stdio.
+Source-of-truth file: `ecolab-radar-config.json` (repo root, never written).
+Working copy:         `mcp-server/radar_working.json` (created on first run,
+                      gitignored, written by execute() commits only).
+
+
+=== PREP LIST ===
+
+5 valid technology ids (from ecolab-radar-config.json):
+  - claude-opus-4-7-azure-ai-foundry        (quadrant 0, no link)
+  - claude-sonnet-4-6-databricks            (quadrant 0, no link)
+  - gpt-5-2-azure-openai                    (quadrant 0, no link)
+  - azure-ai-foundry                        (quadrant 1, no link)
+  - claude-haiku-4-5-databricks             (quadrant 0, no link)
+
+3 technology ids that do NOT exist anywhere in the radar:
+  - gpt-5-nano
+  - frobnicator-9000
+  - totally-fake-tech-xyz
+
+One (team, tech) pair currently in ring 0 (ADOPT):
+  - llm-capability-office / claude-opus-4-7-azure-ai-foundry
+
+One (team, tech) pair currently in ring 1 (TRIAL):
+  - llm-capability-office / claude-haiku-4-5-databricks
+
+default_team:
+  - llm-capability-office
+
+All 9 team ids:
+  llm-capability-office, water-industrial, institutional-specialty,
+  healthcare-lifesciences, commercial-sales, supply-chain, rde, digital-it,
+  finance-operations
+
+
+=== SMOKE TEST 1: Server starts — 2 tools visible ===
+
+>> stdio init:
+server name: radar-mcp
+server version: 1.27.2
+protocol version: 2025-11-25
+
+>> session.list_tools() returned:
+- search
+  inputSchema keys: ['code']
+  description (first 240 chars):
+    Read the tech radar. Write Python using the `radar` proxy object.
+
+    Available types (from Pydantic models):
+      Quadrant: 0=Models, 1=Infrastructure, 2=Frameworks, 3=Techniques
+      Ring: 0=ADOPT, 1=TRIAL, 2=ASSESS, 3=HOLD
+      Moved: -1=down, 0=unc
+- execute
+  inputSchema keys: ['code']
+  description (first 240 chars):
+    Read and write the tech radar. Write Python using the `radar` proxy object.
+
+    All read methods from search() are available, plus:
+      radar.add_technology(id, label, quadrant, link=None) -> Technology
+      radar.assign(team_id, tech_id, ring, mov
+
+VERDICT: PASS — exactly 2 tools registered (search + execute), no extras.
+
+
+=== SMOKE TEST 2: search reads teams ===
+
+>> tool: search
+>> code:
+result = radar.list_teams()
+
+>> response:
+[{"id": "llm-capability-office", "name": "LLM Capability Office", "date": "2026.06"}, {"id": "water-industrial", "name": "Water Treatment & Industrial", "date": "2026.06"}, {"id": "institutional-specialty", "name": "Institutional & Specialty", "date": "2026.06"}, {"id": "healthcare-lifesciences", "name": "Healthcare & Life Sciences", "date": "2026.06"}, {"id": "commercial-sales", "name": "Commercial & Sales", "date": "2026.06"}, {"id": "supply-chain", "name": "Supply Chain", "date": "2026.06"}, {"id": "rde", "name": "RD&E", "date": "2026.06"}, {"id": "digital-it", "name": "Digital & IT", "date": "2026.06"}, {"id": "finance-operations", "name": "Finance & Operations", "date": "2026.06"}]
+
+VERDICT: PASS — 9 team objects returned, each with id + name + date fields
+as the proxy contract requires.
+
+
+=== SMOKE TEST 3: radar_working.json is separate from ecolab-radar-config.json ===
+
+>> filesystem state immediately after server start:
+working copy exists: True  (/Users/kaj11/Downloads/task 3/repo/mcp-server/radar_working.json)
+source exists:       True  (/Users/kaj11/Downloads/task 3/repo/ecolab-radar-config.json)
+source size:  27567 bytes
+working size: 27567 bytes
+semantic equality (json.loads(src) == json.loads(working)): True
+
+>> stderr line emitted by the server on first load:
+Created radar_working.json from ecolab-radar-config.json
+
+>> post-test git status of source file:
+$ git diff --stat ecolab-radar-config.json
+(empty — source file unmodified through every test in this trace)
+
+VERDICT: PASS — server reads from and writes to the working copy only.
+The original ecolab-radar-config.json is byte-identical to its committed
+version after all seven tests in this trace.
+
+NOTE on naming: the original instructions in person2-tester.md refer to
+`docs/config.json`. The repo's source-of-truth file is actually
+`ecolab-radar-config.json` at the repo root, per Person 1's PLAN.md.
+The behaviour (read source -> create working copy -> only write working
+copy) matches the spec; only the file name differs.
+
+
+=== MISUSE TEST 1: Non-existent tech id ===
+
+>> tool: execute
+>> code:
+result = radar.assign('llm-capability-office', 'gpt-5-nano', 1)
+
+>> response:
+Error: Tech 'gpt-5-nano' not found in radar. Did you mean one of: ['gpt-3-5-turbo', 'gpt-5-2-azure-openai', 'gpt-5-4-databricks', 'gpt-5-mini-azure-openai', 'gpt-4o-azure-openai']?
+
+VERDICT: PASS — error names the missing tech AND lists 5 close-match
+alternatives the model can retry with. Self-correcting (Mistake 5
+in the framework).
+
+
+=== MISUSE TEST 2: Duplicate assignment ===
+
+(Setup: claude-opus-4-7-azure-ai-foundry is already in ring 0 / ADOPT
+for llm-capability-office. Re-assigning it must be rejected.)
+
+>> tool: execute
+>> code:
+result = radar.assign('llm-capability-office', 'claude-opus-4-7-azure-ai-foundry', 2)
+
+>> response:
+Error: claude-opus-4-7-azure-ai-foundry is already assigned to llm-capability-office (ring: ADOPT). Use radar.move('llm-capability-office', 'claude-opus-4-7-azure-ai-foundry', <new_ring>) to change its ring.
+
+VERDICT: PASS — error names the current ring (ADOPT) and points the
+model at radar.move() with the exact arguments to retry with.
+
+
+=== MISUSE TEST 3: ADOPT to HOLD skip ===
+
+(Setup: claude-opus-4-7-azure-ai-foundry is in ring 0 / ADOPT for
+llm-capability-office. Moving it directly to ring 3 / HOLD must be
+rejected — must pass through TRIAL or ASSESS first.)
+
+>> tool: execute
+>> code:
+result = radar.move('llm-capability-office', 'claude-opus-4-7-azure-ai-foundry', 3)
+
+>> response:
+Error: Cannot move from ADOPT to HOLD (or HOLD to ADOPT) in one step. Allowed intermediate rings: TRIAL (1) or ASSESS (2).
+
+VERDICT: PASS — error names both forbidden directions and lists the
+two legal intermediate rings with their integer codes.
+
+
+=== WORKFLOW TEST: Add + assign in one execute() call ===
+
+>> tool: execute
+>> code:
+new_tech = radar.add_technology(
+    id='test-smoke-tech',
+    label='Smoke Test Technology',
+    quadrant=2,
+    link='https://example.com/smoke'
+)
+radar.assign('llm-capability-office', new_tech.id, 1, 1)
+radar.commit('test: smoke test add and assign')
+result = radar.get_assignment('llm-capability-office', new_tech.id)
+
+>> stderr (server-side log line emitted by RadarProxy.commit):
+[commit] test: smoke test add and assign
+
+>> response:
+{"tech": "test-smoke-tech", "ring": 1, "moved": 1}
+
+VERDICT: PASS — four operations (add_technology, assign, commit,
+get_assignment) ran in a single execute() call. Single round-trip,
+single tool invocation, single commit message. This is the multi-step
+workflow win (one execute() vs four MCP round-trips in the N-tool
+baseline).
+
+CLEANUP NOTE: this test wrote 'test-smoke-tech' into
+mcp-server/radar_working.json. The working copy is gitignored. To
+reset the radar before the next run, delete the file (it is
+recreated from ecolab-radar-config.json on next server start):
+    rm mcp-server/radar_working.json
+
+
+=== SUMMARY ===
+
+| #  | Test                                                       | Verdict |
+|----|------------------------------------------------------------|---------|
+| S1 | Server starts — 2 tools visible                            | PASS    |
+| S2 | search reads teams                                         | PASS    |
+| S3 | radar_working.json is separate from source config          | PASS    |
+| M1 | Non-existent tech id (assign)                              | PASS    |
+| M2 | Duplicate assignment (assign already-assigned tech)        | PASS    |
+| M3 | ADOPT to HOLD skip (move skips TRIAL/ASSESS)               | PASS    |
+| W1 | Add + assign + commit + read in one execute() call         | PASS    |
+
+No bugs surfaced — no messages sent to Person 1.
