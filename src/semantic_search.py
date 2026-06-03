@@ -1,26 +1,20 @@
-import os
-from dotenv import load_dotenv
-from openai import AzureOpenAI
-from src.chromadb_setup import get_collection
+from src.client_factory import get_embed_client, get_embed_model, LLM_PROFILE
+from src.chromadb_setup import get_collection, COLLECTION_CLOUD, COLLECTION_LOCAL
 
-load_dotenv()
-#again taken from .md file from teams
-client = AzureOpenAI(
-    api_version="2024-12-01-preview",
-    azure_endpoint="https://cds-ds-openai-001-x.openai.azure.com/",
-    api_key=os.environ["AZURE_OPENAI_API_KEY"],
-)
+TOP_K = 4  # nomic-embed-text clusters differently; same k works well
 
-TOP_K = 4  #number of chunks to pull per query
 
 def retrieve(query: str) -> list[dict]:
-    #embed the query, then find the closest chunks in the vector store
-    vec = client.embeddings.create(
-        model="text-embedding-3-small",
+    collection_name = COLLECTION_LOCAL if LLM_PROFILE == "local" else COLLECTION_CLOUD
+    embed_client = get_embed_client()
+    embed_model = get_embed_model()
+
+    vec = embed_client.embeddings.create(
+        model=embed_model,
         input=query,
     ).data[0].embedding
 
-    results = get_collection().query(
+    results = get_collection(collection_name).query(
         query_embeddings=[vec],
         n_results=TOP_K,
         include=["documents", "metadatas"],
