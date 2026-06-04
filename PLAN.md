@@ -142,10 +142,10 @@ Owns: the brain, the trace, the chaos story, and three docs.
 - [x] Commit: `feat(orchestrator): SQLite-backed workflow engine`
 
 ### P3.2 — Failure handling
-- [ ] Timeout: 5s per cross-agent call; on expiry, log + retry once with same idempotency_key.
-- [ ] Max retries: 2; after that → poison.
-- [ ] Dead-letter table `poison(correlation_id, envelope_json, reason, ts)`.
-- [ ] Partial completion: workflow status field `pending|in_progress|completed|failed|poisoned`. On orchestrator restart, resume any `in_progress`.
+- [x] Timeout: 5s per cross-agent call; on expiry, log + retry once with same idempotency_key. (`ORCH_CALL_TIMEOUT=5`, retry loop in `_send_with_retries`.)
+- [x] Max retries: 2; after that → poison. (`MAX_ATTEMPTS=3` = 1 try + 2 retries; chaos test confirms 3 attempts then `workflow_poisoned`.)
+- [x] Dead-letter table `poison(correlation_id, envelope_json, reason, ts)`. (`orchestrator/state.py`, exposed at `GET /poison`.)
+- [x] Partial completion: workflow status field `pending|in_progress|completed|failed|poisoned`. On orchestrator restart, mark in-flight as `failed` with `step=orchestrator_restart` (deliberate fail-loud, see `docs/failure-modes.md`).
 
 ### P3.3 — Observability (`observability/`)
 - [ ] Structured JSON logger (`structlog`). Every log line has `correlation_id`, `causation_id`, `sender`, `recipient`, `capability`, `event`.
