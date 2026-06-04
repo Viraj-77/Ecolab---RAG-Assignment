@@ -133,13 +133,13 @@ Owns: the two business agents. Wrap A and B; do NOT modify them.
 Owns: the brain, the trace, the chaos story, and three docs.
 
 ### P3.1 — Orchestrator (`orchestrator/`, port 8001)
-- [ ] FastAPI + SQLite (`orchestrator/state.db`).
-- [ ] Table `workflows(correlation_id, step, status, last_envelope_json, created_at, updated_at)`.
-- [ ] `POST /request` — entry point for user requests. Generates correlation_id.
-- [ ] Intent classifier: keyword first-pass (`"explain"|"what is"|"why"` → RAG; `"add"|"propose"|"change"` → MCP). If ambiguous, small LLM call. **Log the prompt and the chosen capability.**
-- [ ] Query registry by capability → pick endpoint → send envelope.
-- [ ] Persist state at every step; resume on restart.
-- [ ] Commit: `feat(orchestrator): SQLite-backed workflow engine`
+- [x] FastAPI + SQLite (`orchestrator/state.db`).
+- [x] Table `workflows(correlation_id, step, status, last_envelope_json, created_at, updated_at)`.
+- [x] `POST /request` — entry point for user requests. Generates correlation_id.
+- [x] Intent classifier: keyword first-pass (`"explain"|"what is"|"why"` → RAG; `"add"|"propose"|"change"` → MCP). If ambiguous, small LLM call. **Log the prompt and the chosen capability.**
+- [x] Query registry by capability → pick endpoint → send envelope.
+- [x] Persist state at every step; resume on restart.
+- [x] Commit: `feat(orchestrator): SQLite-backed workflow engine`
 
 ### P3.2 — Failure handling
 - [ ] Timeout: 5s per cross-agent call; on expiry, log + retry once with same idempotency_key.
