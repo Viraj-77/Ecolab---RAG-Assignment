@@ -124,7 +124,7 @@ Owns: the two business agents. Wrap A and B; do NOT modify them.
 - [x] Script that boots registry + both agents and round-trips one envelope to each. No orchestrator yet. (`python -m agents.smoke_test`)
 
 ### P2.4 — README contribution
-- [ ] One paragraph: what each agent does that the other can't (composition honesty).
+- [x] One paragraph: what each agent does that the other can't (composition honesty).
 
 ---
 

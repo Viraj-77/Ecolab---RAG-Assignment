@@ -19,8 +19,10 @@ envelope/           shared Pydantic message envelope + HTTP client
 registry/           FastAPI registry (register/deregister/query/health, TTL heartbeat)
 orchestrator/       FastAPI orchestrator (Person 3, in progress)
 agents/
-  rag_agent/        wraps exercise-a-rag (Person 2, in progress)
-  mcp_agent/        wraps exercise-b-mcp (Person 2, in progress)
+  rag_agent/        wraps exercise-a-rag (Person 2, done)
+  mcp_agent/        wraps exercise-b-mcp (Person 2, done)
+  lifecycle.py      shared register/heartbeat/idempotency helper
+  smoke_test.py     boots registry + both agents and round-trips one envelope to each
 exercise-a-rag/     vendored from branch local-mode-code-Viraj — read-only
 exercise-b-mcp/     vendored from branch Team/ExerciseB-Variant2 — read-only
 scripts/            check-ports.sh / free-ports.sh
@@ -48,6 +50,14 @@ If `make up` fails on port check:
 ```bash
 bash scripts/free-ports.sh   # interactive — confirms before killing
 ```
+
+## Smoke test (Person 2)
+
+```bash
+python -m agents.smoke_test
+```
+
+Spawns the registry + both business agents in subprocesses, waits for them to become healthy, asserts the registry lists `rag-agent` and `mcp-agent`, then round-trips one envelope to each (capability `answer-from-corpus` and `propose-radar-change`). Exits 0 on success. Useful for catching envelope-shape regressions before the orchestrator is involved.
 
 ## Ports
 
@@ -108,6 +118,16 @@ sequenceDiagram
     O-->>U: composed answer (correlation_id)
 ```
 
+## Composition — what each agent uniquely does
+
+Each of the three processes does something the other two **cannot** — that's the whole point of composing them rather than collapsing the workflow into one monolithic agent.
+
+- **`rag-agent` (capability `answer-from-corpus`)** — owns the *read-side knowledge*. It is the only process with a vector index over the radar's history, ADRs, and supporting documents (vendored from Exercise A). Ask it *why* a technology is in HOLD or *what changed last quarter* and it can answer from the corpus. It cannot mutate the radar — it has no write methods and no idea what `radar.add_technology(...)` even means.
+- **`mcp-agent` (capability `propose-radar-change`)** — owns the *write-side authority*. It is the only process holding a `RadarProxy` against `radar_working.json` (vendored from Exercise B Variant 2). It can add a technology, assign it to a team, move it between rings, or remove an assignment — and every successful write is committed to disk. It deliberately does *not* answer free-form questions: its job is to apply structured changes and surface the proxy's validators (e.g. "ADOPT requires a link", "no direct ADOPT↔HOLD jump") as machine-readable errors the orchestrator can act on.
+- **`orchestrator` (Person 3)** — owns the *intent and the workflow state*. It is the only process that decides whether a user's request needs reading, writing, or both, and it is the only process that persists workflow state so the system can recover from a mid-flight crash. Neither business agent has any sense of "the user's request" — they each see one envelope at a time.
+
+A monolithic agent that did all three jobs would lose: (a) the read/write blast-radius separation (a buggy retrieval prompt could no longer overwrite the radar), (b) the ability to scale or replace either side independently (swap the local Gemma model into `rag-agent` without touching the writer), and (c) the audit trail — today every cross-agent message is an envelope with a `correlation_id`, so the orchestrator's decision and the eventual radar mutation share one traceable timeline.
+
 ## Status
 
 - [x] P1.0 Vendor exercise A and B
@@ -117,7 +137,10 @@ sequenceDiagram
 - [x] P1.4 Makefile / one-command boot
 - [x] P1.4b Port helper scripts
 - [x] P1.5 README
-- [ ] P2.* RAG and MCP A2A wrappers (Person 2)
+- [x] P2.1 RAG agent A2A wrapper (port 8002)
+- [x] P2.2 MCP agent A2A wrapper (port 8003)
+- [x] P2.3 Smoke test (`python -m agents.smoke_test`)
+- [x] P2.4 Composition paragraph (above)
 - [ ] P3.* Orchestrator, observability, failure handling, docs (Person 3)
 
 See `PLAN.md` for the full task list.
