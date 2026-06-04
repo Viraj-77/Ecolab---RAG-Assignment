@@ -14,8 +14,3 @@ wheels/
 
 # DB
 chroma_db/
-
-# Local model weights — never commit (multi-GB files)
-*.gguf
-*.ggml
-~/.ollama/

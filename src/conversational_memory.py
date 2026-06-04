@@ -18,7 +18,8 @@ class ConversationMemory:
         msg.update(extra)
         self._history.append(msg)
 
-    def add_tool_result(self, tool_call_id: str, content: str):
+    def add_tool_message(self, tool_call_id: str, content: str):
+        #adds a tool response message that is done by calling a tool by llm
         self._history.append({
             "role": "tool",
             "tool_call_id": tool_call_id,
