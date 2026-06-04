@@ -154,8 +154,8 @@ Owns: the brain, the trace, the chaos story, and three docs.
 - [x] LLM-driven decisions log the **full prompt + response** alongside the chosen next step. (`intent_classified` event carries `llm_prompt` and `llm_response` fields when method=llm.)
 
 ### P3.4 — Chaos test
-- [ ] Script: start system, fire a request, kill RAG agent mid-flight, observe.
-- [ ] Document outcome in `docs/failure-modes.md`.
+- [x] Script: start system, fire a request, kill RAG agent mid-flight, observe. (`python -m orchestrator.chaos_test` — runs SIGTERM AND SIGKILL phases.)
+- [x] Document outcome in `docs/failure-modes.md`.
 
 ### P3.5 — Docs
 - [ ] `docs/topology-decision.md` — orchestration vs choreography, scored on cognitive load / blast radius / debuggability / latency / team-doubles-next-year.
