@@ -15,18 +15,30 @@ See `PLAN.md` for the full team plan, ownership boundaries, and onboarding flow.
 ## Repo layout
 
 ```
-envelope/           shared Pydantic message envelope + HTTP client
-registry/           FastAPI registry (register/deregister/query/health, TTL heartbeat)
-orchestrator/       FastAPI orchestrator (Person 3, in progress)
+envelope/             shared Pydantic message envelope + HTTP client
+registry/             FastAPI registry (register/deregister/query/health, TTL heartbeat)
+orchestrator/         FastAPI orchestrator + SQLite workflow state
+  main.py             /request entry point, dispatch loop, retry/poison
+  state.py            SQLite store: workflows + poison tables
+  classifier.py       intent router (keyword first, LLM fallback hook)
+  e2e_test.py         end-to-end happy-path test (read + write + idempotency)
+  chaos_test.py       SIGTERM + SIGKILL chaos test (writes logs/chaos-trace.txt)
 agents/
-  rag_agent/        wraps exercise-a-rag (Person 2, done)
-  mcp_agent/        wraps exercise-b-mcp (Person 2, done)
-  lifecycle.py      shared register/heartbeat/idempotency helper
-  smoke_test.py     boots registry + both agents and round-trips one envelope to each
-exercise-a-rag/     vendored from branch local-mode-code-Viraj — read-only
-exercise-b-mcp/     vendored from branch Team/ExerciseB-Variant2 — read-only
-scripts/            check-ports.sh / free-ports.sh
-Makefile            one-command boot
+  rag_agent/          wraps exercise-a-rag (capability answer-from-corpus)
+  mcp_agent/          wraps exercise-b-mcp (capability propose-radar-change)
+  lifecycle.py        shared register/heartbeat/idempotency helper
+  smoke_test.py       boots registry + both agents and round-trips one envelope to each
+observability/
+  logger.py           structured ndjson event sink (logs.ndjson)
+  query.py            timeline tool: python -m observability.query <correlation_id>
+docs/
+  topology-decision.md       why orchestration over choreography
+  observability-walkthrough.md  two real correlation_ids, walked through
+  failure-modes.md           anticipated failures + chaos test write-up
+exercise-a-rag/       vendored from branch local-mode-code-Viraj — read-only
+exercise-b-mcp/       vendored from branch Team/ExerciseB-Variant2 — read-only
+scripts/              check-ports.sh / free-ports.sh
+Makefile              one-command boot
 ```
 
 ## Setup (one-time)
@@ -58,6 +70,39 @@ python -m agents.smoke_test
 ```
 
 Spawns the registry + both business agents in subprocesses, waits for them to become healthy, asserts the registry lists `rag-agent` and `mcp-agent`, then round-trips one envelope to each (capability `answer-from-corpus` and `propose-radar-change`). Exits 0 on success. Useful for catching envelope-shape regressions before the orchestrator is involved.
+
+## End-to-end test (Person 3)
+
+```bash
+python -m orchestrator.e2e_test
+```
+
+Boots the full system (registry + rag-agent + mcp-agent + orchestrator), then fires three requests through `POST /request`:
+1. A read (`"What is the Tech Radar?"`) — keyword-classified to `answer-from-corpus`.
+2. An explicit write (`action=add_technology` + params) — routed to `propose-radar-change`.
+3. An idempotency probe — same envelope sent twice to rag-agent; second call must return the cached reply byte-for-byte.
+
+Exits 0 on success.
+
+## Chaos test (Person 3)
+
+```bash
+python -m orchestrator.chaos_test
+```
+
+Runs both failure paths in one go: **SIGTERM** (graceful — agent deregisters; orchestrator fast-fails with `no agent advertises capability ...`), then **SIGKILL** (sudden — registry still lists the dead endpoint; orchestrator retries 3× with the same `idempotency_key` and writes a row to the `poison` table). Writes the structured timeline to `logs/chaos-trace.txt`. See `docs/failure-modes.md` for the walk-through.
+
+## Observability — answering "why did X call Y?"
+
+Every A2A event lands as one JSON line in `observability/logs.ndjson`. Render the timeline for a workflow with:
+
+```bash
+python -m observability.query <correlation_id>   # full timeline, ts-sorted
+python -m observability.query --list             # last 10 correlation_ids
+python -m observability.query --tail             # last 20 events of any kind
+```
+
+The classifier emits `intent_classified` events that carry `chosen_capability`, `method`, `matched_keywords`, and (when an LLM is involved) the full prompt and response — so "why did the orchestrator call mcp-agent?" reduces to reading one line. See `docs/observability-walkthrough.md` for two real correlation_ids walked through end-to-end.
 
 ## Ports
 
@@ -141,6 +186,11 @@ A monolithic agent that did all three jobs would lose: (a) the read/write blast-
 - [x] P2.2 MCP agent A2A wrapper (port 8003)
 - [x] P2.3 Smoke test (`python -m agents.smoke_test`)
 - [x] P2.4 Composition paragraph (above)
-- [ ] P3.* Orchestrator, observability, failure handling, docs (Person 3)
+- [x] P3.1 Orchestrator + SQLite workflow engine
+- [x] P3.2 Failure handling (timeouts, retries with idempotency, poison)
+- [x] P3.3 Observability (`observability/logs.ndjson` + `query.py`)
+- [x] P3.4 Chaos test (`python -m orchestrator.chaos_test`)
+- [x] P3.5 Docs (`docs/topology-decision.md`, `observability-walkthrough.md`, `failure-modes.md`)
+- [ ] P3.6 Demo recording (out of scope for this Claude session)
 
 See `PLAN.md` for the full task list.

@@ -158,9 +158,9 @@ Owns: the brain, the trace, the chaos story, and three docs.
 - [x] Document outcome in `docs/failure-modes.md`.
 
 ### P3.5 — Docs
-- [ ] `docs/topology-decision.md` — orchestration vs choreography, scored on cognitive load / blast radius / debuggability / latency / team-doubles-next-year.
-- [ ] `docs/observability-walkthrough.md` — pick a real correlation_id, walk through logs, answer "why did X call Y" twice.
-- [ ] `docs/failure-modes.md` — chaos test + anticipated failure modes.
+- [x] `docs/topology-decision.md` — orchestration vs choreography, scored on cognitive load / blast radius / debuggability / latency / team-doubles-next-year.
+- [x] `docs/observability-walkthrough.md` — pick a real correlation_id, walk through logs, answer "why did X call Y" twice.
+- [x] `docs/failure-modes.md` — chaos test + anticipated failure modes.
 
 ### P3.6 — Demo recording
 - [ ] ~3 min: happy path + chaos path. Host internally; link in README.
