@@ -148,10 +148,10 @@ Owns: the brain, the trace, the chaos story, and three docs.
 - [x] Partial completion: workflow status field `pending|in_progress|completed|failed|poisoned`. On orchestrator restart, mark in-flight as `failed` with `step=orchestrator_restart` (deliberate fail-loud, see `docs/failure-modes.md`).
 
 ### P3.3 — Observability (`observability/`)
-- [ ] Structured JSON logger (`structlog`). Every log line has `correlation_id`, `causation_id`, `sender`, `recipient`, `capability`, `event`.
-- [ ] Logs flush to `observability/logs.ndjson`.
-- [ ] `observability/query.py CORRELATION_ID` → prints timeline (sorted by ts) for that workflow.
-- [ ] LLM-driven decisions log the **full prompt + response** alongside the chosen next step.
+- [x] Structured JSON logger. Every log line has `correlation_id`, `causation_id`, `sender`, `recipient`, `capability`, `event`. (Rolled our own minimal `log_event` instead of bringing in structlog — kept dependencies lean; same field set.)
+- [x] Logs flush to `observability/logs.ndjson`.
+- [x] `observability/query.py CORRELATION_ID` → prints timeline (sorted by ts) for that workflow. Also `--list` and `--tail`.
+- [x] LLM-driven decisions log the **full prompt + response** alongside the chosen next step. (`intent_classified` event carries `llm_prompt` and `llm_response` fields when method=llm.)
 
 ### P3.4 — Chaos test
 - [ ] Script: start system, fire a request, kill RAG agent mid-flight, observe.

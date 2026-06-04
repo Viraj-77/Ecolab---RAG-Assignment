@@ -19,6 +19,7 @@ chroma_db/
 # Logs / pids
 logs/
 *.pid
+*.ndjson
 .DS_Store
 
 # Exercise B working radar — generated at runtime, not source
