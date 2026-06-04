@@ -105,14 +105,14 @@ git push
 
 Owns: the two business agents. Wrap A and B; do NOT modify them.
 
-### P2.1 — RAG agent (`agents/rag-agent/`, port 8002)
-- [ ] FastAPI app. On startup → POST to registry with capability `answer-from-corpus`.
-- [ ] On shutdown → deregister.
-- [ ] `POST /invoke` — accepts `Envelope`, extracts `payload.question`, calls into `exercise-a-rag`, returns reply `Envelope`.
-- [ ] `GET /health`.
-- [ ] Heartbeat task every 10s.
-- [ ] Idempotency: in-memory LRU(1000) on `idempotency_key` → cached reply.
-- [ ] Commit: `feat(rag-agent): A2A wrapper for exercise A`
+### P2.1 — RAG agent (`agents/rag_agent/`, port 8002)
+- [x] FastAPI app. On startup → POST to registry with capability `answer-from-corpus`.
+- [x] On shutdown → deregister.
+- [x] `POST /invoke` — accepts `Envelope`, extracts `payload.question`, calls into `exercise-a-rag`, returns reply `Envelope`.
+- [x] `GET /health`.
+- [x] Heartbeat task every 10s.
+- [x] Idempotency: in-memory LRU(1000) on `idempotency_key` → cached reply.
+- [x] Commit: `feat(rag-agent): A2A wrapper for exercise A`
 
 ### P2.2 — MCP agent (`agents/mcp-agent/`, port 8003)
 - [ ] FastAPI app. Capability `propose-radar-change`.
