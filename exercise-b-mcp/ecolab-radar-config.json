@@ -1,0 +1,777 @@
+{
+  "date": "2026.06",
+  "default_team": "llm-capability-office",
+  "teams": [
+    {
+      "id": "llm-capability-office",
+      "name": "LLM Capability Office",
+      "date": "2026.06"
+    },
+    {
+      "id": "water-industrial",
+      "name": "Water Treatment & Industrial",
+      "date": "2026.06"
+    },
+    {
+      "id": "institutional-specialty",
+      "name": "Institutional & Specialty",
+      "date": "2026.06"
+    },
+    {
+      "id": "healthcare-lifesciences",
+      "name": "Healthcare & Life Sciences",
+      "date": "2026.06"
+    },
+    {
+      "id": "commercial-sales",
+      "name": "Commercial & Sales",
+      "date": "2026.06"
+    },
+    {
+      "id": "supply-chain",
+      "name": "Supply Chain",
+      "date": "2026.06"
+    },
+    {
+      "id": "rde",
+      "name": "RD&E",
+      "date": "2026.06"
+    },
+    {
+      "id": "digital-it",
+      "name": "Digital & IT",
+      "date": "2026.06"
+    },
+    {
+      "id": "finance-operations",
+      "name": "Finance & Operations",
+      "date": "2026.06"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "gpt-4o-azure-openai",
+      "label": "GPT-4o (Azure OpenAI)",
+      "quadrant": 0
+    },
+    {
+      "id": "gpt-5-2-azure-openai",
+      "label": "GPT-5.2 (Azure OpenAI)",
+      "quadrant": 0
+    },
+    {
+      "id": "gpt-5-mini-azure-openai",
+      "label": "GPT-5-mini (Azure OpenAI)",
+      "quadrant": 0
+    },
+    {
+      "id": "claude-opus-4-7-azure-ai-foundry",
+      "label": "Claude Opus 4.7 (Azure AI Foundry)",
+      "quadrant": 0
+    },
+    {
+      "id": "claude-sonnet-4-6-databricks",
+      "label": "Claude Sonnet 4.6 (Databricks)",
+      "quadrant": 0
+    },
+    {
+      "id": "claude-haiku-4-5-databricks",
+      "label": "Claude Haiku 4.5 (Databricks)",
+      "quadrant": 0
+    },
+    {
+      "id": "gemini-2-5-pro-databricks",
+      "label": "Gemini 2.5 Pro (Databricks)",
+      "quadrant": 0
+    },
+    {
+      "id": "huggingface-models-databricks",
+      "label": "HuggingFace Models (Databricks)",
+      "quadrant": 0
+    },
+    {
+      "id": "ollama-local-inference",
+      "label": "Ollama (local inference)",
+      "quadrant": 0
+    },
+    {
+      "id": "gpt-3-5-turbo",
+      "label": "GPT-3.5 Turbo",
+      "quadrant": 0
+    },
+    {
+      "id": "gpt-4o-mini-azure-openai",
+      "label": "GPT-4o-mini (Azure OpenAI)",
+      "quadrant": 0
+    },
+    {
+      "id": "gpt-5-4-databricks",
+      "label": "GPT-5-4 (Databricks)",
+      "quadrant": 0
+    },
+    {
+      "id": "domain-fine-tuned-llm",
+      "label": "Domain Fine-Tuned LLM (Ecolab)",
+      "quadrant": 0
+    },
+    {
+      "id": "biobert-lifesciences",
+      "label": "BioBERT (Life Sciences NLP)",
+      "quadrant": 0
+    },
+    {
+      "id": "azure-ad-entra-id",
+      "label": "Azure AD / Entra ID",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-ai-foundry",
+      "label": "Azure AI Foundry",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-blob-storage",
+      "label": "Azure Blob Storage",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-container-apps",
+      "label": "Azure Container Apps",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-cosmos-db",
+      "label": "Azure Cosmos DB",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-devops-git-backlog-pipelines",
+      "label": "Azure DevOps (Git / Backlog / Pipelines)",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-key-vault",
+      "label": "Azure Key Vault",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-functions",
+      "label": "Azure Functions",
+      "quadrant": 1
+    },
+    {
+      "id": "databricks-unity-catalog",
+      "label": "Databricks Unity Catalog",
+      "quadrant": 1
+    },
+    {
+      "id": "databricks-model-serving",
+      "label": "Databricks Model Serving",
+      "quadrant": 1
+    },
+    {
+      "id": "databricks-vector-search",
+      "label": "Databricks Vector Search",
+      "quadrant": 1
+    },
+    {
+      "id": "docker",
+      "label": "Docker",
+      "quadrant": 1
+    },
+    {
+      "id": "terraform-opentofu-4-0",
+      "label": "Terraform / OpenTofu (~> 4.0)",
+      "quadrant": 1
+    },
+    {
+      "id": "application-insights",
+      "label": "Application Insights",
+      "quadrant": 1
+    },
+    {
+      "id": "claude-code",
+      "label": "Claude Code",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-iot-hub",
+      "label": "Azure IoT Hub",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-data-factory",
+      "label": "Azure Data Factory",
+      "quadrant": 1
+    },
+    {
+      "id": "sap-erp",
+      "label": "SAP ERP",
+      "quadrant": 1
+    },
+    {
+      "id": "salesforce-crm",
+      "label": "Salesforce CRM",
+      "quadrant": 1
+    },
+    {
+      "id": "power-bi",
+      "label": "Power BI",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-synapse-analytics",
+      "label": "Azure Synapse Analytics",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-static-web-apps",
+      "label": "Azure Static Web Apps",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-app-service-linux-node-22",
+      "label": "Azure App Service (Linux/Node 22)",
+      "quadrant": 1
+    },
+    {
+      "id": "azure-redis-cache",
+      "label": "Azure Redis Cache",
+      "quadrant": 1
+    },
+    {
+      "id": "google-vertex-ai",
+      "label": "Google Vertex AI",
+      "quadrant": 1
+    },
+    {
+      "id": "databricks-apps-bundles",
+      "label": "Databricks Apps / Bundles",
+      "quadrant": 1
+    },
+    {
+      "id": "mixpanel",
+      "label": "Mixpanel",
+      "quadrant": 1
+    },
+    {
+      "id": "fastapi-uvicorn",
+      "label": "FastAPI + Uvicorn",
+      "quadrant": 2
+    },
+    {
+      "id": "mcp-model-context-protocol",
+      "label": "MCP (Model Context Protocol)",
+      "quadrant": 2
+    },
+    {
+      "id": "openai-sdk",
+      "label": "OpenAI SDK",
+      "quadrant": 2
+    },
+    {
+      "id": "pydantic-v2",
+      "label": "Pydantic v2",
+      "quadrant": 2
+    },
+    {
+      "id": "pyspark-delta-lake",
+      "label": "PySpark + Delta Lake",
+      "quadrant": 2
+    },
+    {
+      "id": "python-3-11",
+      "label": "Python 3.11",
+      "quadrant": 2
+    },
+    {
+      "id": "typescript-5-strict",
+      "label": "TypeScript 5 (strict)",
+      "quadrant": 2
+    },
+    {
+      "id": "pytest",
+      "label": "pytest",
+      "quadrant": 2
+    },
+    {
+      "id": "semantic-kernel",
+      "label": "Semantic Kernel",
+      "quadrant": 2
+    },
+    {
+      "id": "fastmcp",
+      "label": "FastMCP",
+      "quadrant": 2
+    },
+    {
+      "id": "d3-js-v7",
+      "label": "D3.js v7",
+      "quadrant": 2
+    },
+    {
+      "id": "tailwind-css-4",
+      "label": "Tailwind CSS 4",
+      "quadrant": 2
+    },
+    {
+      "id": "ruff-mypy",
+      "label": "Ruff + MyPy",
+      "quadrant": 2
+    },
+    {
+      "id": "pandas-numpy",
+      "label": "Pandas + NumPy",
+      "quadrant": 2
+    },
+    {
+      "id": "scikit-learn",
+      "label": "scikit-learn",
+      "quadrant": 2
+    },
+    {
+      "id": "opcua-client",
+      "label": "OPC-UA Client (industrial IoT)",
+      "quadrant": 2
+    },
+    {
+      "id": "lims-integration-sdk",
+      "label": "LIMS Integration SDK",
+      "quadrant": 2
+    },
+    {
+      "id": "chromadb",
+      "label": "ChromaDB",
+      "quadrant": 2
+    },
+    {
+      "id": "a2a-protocol-sdk",
+      "label": "A2A Protocol SDK",
+      "quadrant": 2
+    },
+    {
+      "id": "httpx-async-http-client",
+      "label": "httpx (Async HTTP Client)",
+      "quadrant": 2
+    },
+    {
+      "id": "mermaid",
+      "label": "Mermaid",
+      "quadrant": 2
+    },
+    {
+      "id": "playwright",
+      "label": "Playwright",
+      "quadrant": 2
+    },
+    {
+      "id": "vite-6",
+      "label": "Vite 6+",
+      "quadrant": 2
+    },
+    {
+      "id": "zod",
+      "label": "Zod",
+      "quadrant": 2
+    },
+    {
+      "id": "python-3-14",
+      "label": "Python 3.14",
+      "quadrant": 2
+    },
+    {
+      "id": "prompt-engineering-cot-few-shot",
+      "label": "Prompt Engineering (CoT / Few-Shot)",
+      "quadrant": 3
+    },
+    {
+      "id": "rag-retrieval-augmented-generation",
+      "label": "RAG (Retrieval-Augmented Generation)",
+      "quadrant": 3
+    },
+    {
+      "id": "multi-agent-orchestration",
+      "label": "Multi-Agent Orchestration",
+      "quadrant": 3
+    },
+    {
+      "id": "llm-usage-tracking",
+      "label": "LLM Usage Tracking",
+      "quadrant": 3
+    },
+    {
+      "id": "llm-quality-metrics",
+      "label": "LLM Quality Metrics",
+      "quadrant": 3
+    },
+    {
+      "id": "llm-as-judge-multi-model",
+      "label": "LLM-as-Judge (multi-model)",
+      "quadrant": 3
+    },
+    {
+      "id": "structured-output-json-mode",
+      "label": "Structured Output (JSON Mode)",
+      "quadrant": 3
+    },
+    {
+      "id": "prompt-injection-detection",
+      "label": "Prompt Injection Detection",
+      "quadrant": 3
+    },
+    {
+      "id": "architecture-decision-records-adrs",
+      "label": "Architecture Decision Records (ADRs)",
+      "quadrant": 3
+    },
+    {
+      "id": "gitops-config-as-code",
+      "label": "GitOps (config-as-code)",
+      "quadrant": 3
+    },
+    {
+      "id": "opentelemetry-tracing",
+      "label": "OpenTelemetry Tracing",
+      "quadrant": 3
+    },
+    {
+      "id": "tdd-red-green-refactor",
+      "label": "TDD (Red-Green-Refactor)",
+      "quadrant": 3
+    },
+    {
+      "id": "anomaly-detection-water-quality",
+      "label": "Anomaly Detection (Water Quality)",
+      "quadrant": 3
+    },
+    {
+      "id": "predictive-maintenance-ml",
+      "label": "Predictive Maintenance (ML)",
+      "quadrant": 3
+    },
+    {
+      "id": "digital-twin-simulation",
+      "label": "Digital Twin Simulation",
+      "quadrant": 3
+    },
+    {
+      "id": "response-caching",
+      "label": "Response Caching",
+      "quadrant": 3
+    },
+    {
+      "id": "graphrag",
+      "label": "GraphRAG",
+      "quadrant": 3
+    },
+    {
+      "id": "circuit-breaker-pattern",
+      "label": "Circuit Breaker Pattern",
+      "quadrant": 3
+    },
+    {
+      "id": "sse-streaming",
+      "label": "SSE Streaming",
+      "quadrant": 3
+    },
+    {
+      "id": "manual-prompt-chaining",
+      "label": "Manual Prompt Chaining",
+      "quadrant": 3
+    },
+    {
+      "id": "a2a-protocol-google",
+      "label": "A2A Protocol (Google)",
+      "quadrant": 3
+    },
+    {
+      "id": "llm-confidence-scoring",
+      "label": "LLM Confidence Scoring",
+      "quadrant": 3
+    }
+  ],
+  "assignments": {
+    "llm-capability-office": [
+      { "tech": "claude-opus-4-7-azure-ai-foundry", "ring": 0, "moved": 0 },
+      { "tech": "claude-sonnet-4-6-databricks", "ring": 0, "moved": 0 },
+      { "tech": "claude-haiku-4-5-databricks", "ring": 1, "moved": 1 },
+      { "tech": "gemini-2-5-pro-databricks", "ring": 1, "moved": 1 },
+      { "tech": "gpt-5-2-azure-openai", "ring": 1, "moved": 1 },
+      { "tech": "huggingface-models-databricks", "ring": 1, "moved": 0 },
+      { "tech": "ollama-local-inference", "ring": 2, "moved": 0 },
+      { "tech": "domain-fine-tuned-llm", "ring": 2, "moved": 1 },
+      { "tech": "gpt-3-5-turbo", "ring": 3, "moved": -1 },
+      { "tech": "azure-ai-foundry", "ring": 0, "moved": 0 },
+      { "tech": "azure-devops-git-backlog-pipelines", "ring": 0, "moved": 0 },
+      { "tech": "claude-code", "ring": 0, "moved": 0 },
+      { "tech": "databricks-model-serving", "ring": 0, "moved": 0 },
+      { "tech": "databricks-unity-catalog", "ring": 0, "moved": 0 },
+      { "tech": "databricks-vector-search", "ring": 0, "moved": 0 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-key-vault", "ring": 0, "moved": 0 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "docker", "ring": 0, "moved": 0 },
+      { "tech": "terraform-opentofu-4-0", "ring": 0, "moved": 0 },
+      { "tech": "application-insights", "ring": 1, "moved": 0 },
+      { "tech": "mcp-model-context-protocol", "ring": 0, "moved": 0 },
+      { "tech": "fastapi-uvicorn", "ring": 0, "moved": 0 },
+      { "tech": "python-3-11", "ring": 0, "moved": 0 },
+      { "tech": "pydantic-v2", "ring": 0, "moved": 0 },
+      { "tech": "typescript-5-strict", "ring": 0, "moved": 0 },
+      { "tech": "fastmcp", "ring": 1, "moved": 1 },
+      { "tech": "semantic-kernel", "ring": 1, "moved": 0 },
+      { "tech": "chromadb", "ring": 1, "moved": 1 },
+      { "tech": "openai-sdk", "ring": 0, "moved": 0 },
+      { "tech": "ruff-mypy", "ring": 0, "moved": 0 },
+      { "tech": "pytest", "ring": 0, "moved": 0 },
+      { "tech": "prompt-engineering-cot-few-shot", "ring": 0, "moved": 0 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 0, "moved": 0 },
+      { "tech": "multi-agent-orchestration", "ring": 1, "moved": 1 },
+      { "tech": "llm-usage-tracking", "ring": 0, "moved": 0 },
+      { "tech": "llm-quality-metrics", "ring": 0, "moved": 0 },
+      { "tech": "llm-as-judge-multi-model", "ring": 1, "moved": 1 },
+      { "tech": "structured-output-json-mode", "ring": 0, "moved": 0 },
+      { "tech": "prompt-injection-detection", "ring": 1, "moved": 0 },
+      { "tech": "llm-confidence-scoring", "ring": 1, "moved": 0 },
+      { "tech": "gitops-config-as-code", "ring": 0, "moved": 0 },
+      { "tech": "opentelemetry-tracing", "ring": 1, "moved": 0 },
+      { "tech": "architecture-decision-records-adrs", "ring": 0, "moved": 0 },
+      { "tech": "response-caching", "ring": 1, "moved": 0 },
+      { "tech": "gpt-4o-mini-azure-openai", "ring": 3, "moved": -1 },
+      { "tech": "gpt-5-4-databricks", "ring": 1, "moved": 1 },
+      { "tech": "google-vertex-ai", "ring": 1, "moved": 1 },
+      { "tech": "databricks-apps-bundles", "ring": 0, "moved": 0 },
+      { "tech": "mixpanel", "ring": 1, "moved": 0 },
+      { "tech": "azure-static-web-apps", "ring": 0, "moved": 0 },
+      { "tech": "azure-app-service-linux-node-22", "ring": 0, "moved": 0 },
+      { "tech": "azure-redis-cache", "ring": 1, "moved": 0 },
+      { "tech": "a2a-protocol-sdk", "ring": 1, "moved": 1 },
+      { "tech": "a2a-protocol-google", "ring": 1, "moved": 1 },
+      { "tech": "httpx-async-http-client", "ring": 0, "moved": 0 },
+      { "tech": "mermaid", "ring": 0, "moved": 0 },
+      { "tech": "vite-6", "ring": 0, "moved": 0 },
+      { "tech": "zod", "ring": 0, "moved": 0 },
+      { "tech": "python-3-14", "ring": 2, "moved": 1 },
+      { "tech": "graphrag", "ring": 2, "moved": 1 },
+      { "tech": "sse-streaming", "ring": 0, "moved": 0 },
+      { "tech": "manual-prompt-chaining", "ring": 3, "moved": -1 },
+      { "tech": "circuit-breaker-pattern", "ring": 1, "moved": 0 },
+      { "tech": "playwright", "ring": 1, "moved": 0 }
+    ],
+    "water-industrial": [
+      { "tech": "gpt-4o-azure-openai", "ring": 1, "moved": 0 },
+      { "tech": "gpt-5-mini-azure-openai", "ring": 2, "moved": 1 },
+      { "tech": "domain-fine-tuned-llm", "ring": 1, "moved": 1 },
+      { "tech": "azure-iot-hub", "ring": 0, "moved": 0 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-data-factory", "ring": 0, "moved": 0 },
+      { "tech": "azure-synapse-analytics", "ring": 1, "moved": 0 },
+      { "tech": "power-bi", "ring": 0, "moved": 0 },
+      { "tech": "pyspark-delta-lake", "ring": 1, "moved": 0 },
+      { "tech": "pandas-numpy", "ring": 0, "moved": 0 },
+      { "tech": "scikit-learn", "ring": 0, "moved": 0 },
+      { "tech": "opcua-client", "ring": 0, "moved": 0 },
+      { "tech": "python-3-11", "ring": 0, "moved": 0 },
+      { "tech": "anomaly-detection-water-quality", "ring": 0, "moved": 0 },
+      { "tech": "predictive-maintenance-ml", "ring": 1, "moved": 1 },
+      { "tech": "digital-twin-simulation", "ring": 2, "moved": 1 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 2, "moved": 1 },
+      { "tech": "structured-output-json-mode", "ring": 1, "moved": 0 },
+      { "tech": "opentelemetry-tracing", "ring": 2, "moved": 0 },
+      { "tech": "graphrag", "ring": 3, "moved": 0 },
+      { "tech": "circuit-breaker-pattern", "ring": 2, "moved": 0 },
+      { "tech": "azure-redis-cache", "ring": 2, "moved": 0 },
+      { "tech": "python-3-14", "ring": 3, "moved": 0 }
+    ],
+    "institutional-specialty": [
+      { "tech": "gpt-4o-azure-openai", "ring": 0, "moved": 0 },
+      { "tech": "gpt-5-mini-azure-openai", "ring": 1, "moved": 1 },
+      { "tech": "claude-haiku-4-5-databricks", "ring": 2, "moved": 1 },
+      { "tech": "salesforce-crm", "ring": 0, "moved": 0 },
+      { "tech": "power-bi", "ring": 0, "moved": 0 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-functions", "ring": 1, "moved": 0 },
+      { "tech": "python-3-11", "ring": 1, "moved": 0 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 1, "moved": 1 },
+      { "tech": "prompt-engineering-cot-few-shot", "ring": 1, "moved": 0 },
+      { "tech": "structured-output-json-mode", "ring": 1, "moved": 0 },
+      { "tech": "llm-usage-tracking", "ring": 2, "moved": 1 },
+      { "tech": "response-caching", "ring": 2, "moved": 0 },
+      { "tech": "mixpanel", "ring": 2, "moved": 1 },
+      { "tech": "gpt-4o-mini-azure-openai", "ring": 1, "moved": 0 },
+      { "tech": "azure-static-web-apps", "ring": 1, "moved": 0 },
+      { "tech": "manual-prompt-chaining", "ring": 2, "moved": 0 },
+      { "tech": "sse-streaming", "ring": 2, "moved": 1 }
+    ],
+    "healthcare-lifesciences": [
+      { "tech": "gpt-4o-azure-openai", "ring": 1, "moved": 0 },
+      { "tech": "biobert-lifesciences", "ring": 1, "moved": 1 },
+      { "tech": "domain-fine-tuned-llm", "ring": 2, "moved": 1 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-cosmos-db", "ring": 1, "moved": 0 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "azure-key-vault", "ring": 0, "moved": 0 },
+      { "tech": "lims-integration-sdk", "ring": 0, "moved": 0 },
+      { "tech": "python-3-11", "ring": 0, "moved": 0 },
+      { "tech": "pandas-numpy", "ring": 0, "moved": 0 },
+      { "tech": "scikit-learn", "ring": 1, "moved": 0 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 2, "moved": 1 },
+      { "tech": "prompt-injection-detection", "ring": 1, "moved": 0 },
+      { "tech": "llm-confidence-scoring", "ring": 2, "moved": 1 },
+      { "tech": "structured-output-json-mode", "ring": 1, "moved": 0 },
+      { "tech": "anomaly-detection-water-quality", "ring": 2, "moved": 0 },
+      { "tech": "tdd-red-green-refactor", "ring": 1, "moved": 0 },
+      { "tech": "graphrag", "ring": 2, "moved": 1 },
+      { "tech": "circuit-breaker-pattern", "ring": 2, "moved": 0 },
+      { "tech": "gpt-4o-mini-azure-openai", "ring": 2, "moved": 0 },
+      { "tech": "zod", "ring": 2, "moved": 0 }
+    ],
+    "commercial-sales": [
+      { "tech": "gpt-4o-azure-openai", "ring": 0, "moved": 0 },
+      { "tech": "gpt-5-mini-azure-openai", "ring": 1, "moved": 1 },
+      { "tech": "claude-haiku-4-5-databricks", "ring": 2, "moved": 1 },
+      { "tech": "salesforce-crm", "ring": 0, "moved": 0 },
+      { "tech": "power-bi", "ring": 0, "moved": 0 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "azure-functions", "ring": 1, "moved": 0 },
+      { "tech": "azure-cosmos-db", "ring": 2, "moved": 0 },
+      { "tech": "python-3-11", "ring": 1, "moved": 0 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 1, "moved": 1 },
+      { "tech": "prompt-engineering-cot-few-shot", "ring": 1, "moved": 0 },
+      { "tech": "structured-output-json-mode", "ring": 1, "moved": 0 },
+      { "tech": "llm-usage-tracking", "ring": 2, "moved": 0 },
+      { "tech": "multi-agent-orchestration", "ring": 3, "moved": 0 },
+      { "tech": "response-caching", "ring": 2, "moved": 0 },
+      { "tech": "gpt-4o-mini-azure-openai", "ring": 1, "moved": 0 },
+      { "tech": "mixpanel", "ring": 1, "moved": 1 },
+      { "tech": "sse-streaming", "ring": 2, "moved": 1 },
+      { "tech": "manual-prompt-chaining", "ring": 3, "moved": 0 },
+      { "tech": "azure-static-web-apps", "ring": 2, "moved": 0 }
+    ],
+    "supply-chain": [
+      { "tech": "gpt-4o-azure-openai", "ring": 1, "moved": 0 },
+      { "tech": "gpt-5-2-azure-openai", "ring": 2, "moved": 1 },
+      { "tech": "claude-sonnet-4-6-databricks", "ring": 2, "moved": 1 },
+      { "tech": "sap-erp", "ring": 0, "moved": 0 },
+      { "tech": "azure-data-factory", "ring": 0, "moved": 0 },
+      { "tech": "azure-synapse-analytics", "ring": 0, "moved": 0 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "power-bi", "ring": 0, "moved": 0 },
+      { "tech": "pyspark-delta-lake", "ring": 0, "moved": 0 },
+      { "tech": "databricks-unity-catalog", "ring": 1, "moved": 0 },
+      { "tech": "pandas-numpy", "ring": 0, "moved": 0 },
+      { "tech": "python-3-11", "ring": 0, "moved": 0 },
+      { "tech": "scikit-learn", "ring": 1, "moved": 0 },
+      { "tech": "predictive-maintenance-ml", "ring": 1, "moved": 1 },
+      { "tech": "anomaly-detection-water-quality", "ring": 2, "moved": 0 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 2, "moved": 1 },
+      { "tech": "structured-output-json-mode", "ring": 2, "moved": 0 },
+      { "tech": "llm-usage-tracking", "ring": 2, "moved": 0 },
+      { "tech": "gitops-config-as-code", "ring": 1, "moved": 0 },
+      { "tech": "gpt-4o-mini-azure-openai", "ring": 2, "moved": 0 },
+      { "tech": "gpt-5-4-databricks", "ring": 2, "moved": 1 },
+      { "tech": "circuit-breaker-pattern", "ring": 1, "moved": 0 },
+      { "tech": "azure-redis-cache", "ring": 2, "moved": 0 },
+      { "tech": "graphrag", "ring": 3, "moved": 0 }
+    ],
+    "rde": [
+      { "tech": "claude-opus-4-7-azure-ai-foundry", "ring": 0, "moved": 0 },
+      { "tech": "claude-sonnet-4-6-databricks", "ring": 0, "moved": 0 },
+      { "tech": "gemini-2-5-pro-databricks", "ring": 1, "moved": 1 },
+      { "tech": "biobert-lifesciences", "ring": 1, "moved": 1 },
+      { "tech": "domain-fine-tuned-llm", "ring": 1, "moved": 1 },
+      { "tech": "huggingface-models-databricks", "ring": 1, "moved": 0 },
+      { "tech": "ollama-local-inference", "ring": 2, "moved": 0 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-key-vault", "ring": 0, "moved": 0 },
+      { "tech": "azure-devops-git-backlog-pipelines", "ring": 0, "moved": 0 },
+      { "tech": "databricks-model-serving", "ring": 1, "moved": 0 },
+      { "tech": "databricks-vector-search", "ring": 1, "moved": 0 },
+      { "tech": "azure-data-factory", "ring": 1, "moved": 0 },
+      { "tech": "lims-integration-sdk", "ring": 0, "moved": 0 },
+      { "tech": "opcua-client", "ring": 1, "moved": 0 },
+      { "tech": "python-3-11", "ring": 0, "moved": 0 },
+      { "tech": "pyspark-delta-lake", "ring": 0, "moved": 0 },
+      { "tech": "pandas-numpy", "ring": 0, "moved": 0 },
+      { "tech": "scikit-learn", "ring": 0, "moved": 0 },
+      { "tech": "chromadb", "ring": 2, "moved": 1 },
+      { "tech": "ruff-mypy", "ring": 0, "moved": 0 },
+      { "tech": "pytest", "ring": 0, "moved": 0 },
+      { "tech": "tdd-red-green-refactor", "ring": 0, "moved": 0 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 0, "moved": 0 },
+      { "tech": "anomaly-detection-water-quality", "ring": 0, "moved": 0 },
+      { "tech": "predictive-maintenance-ml", "ring": 0, "moved": 0 },
+      { "tech": "digital-twin-simulation", "ring": 1, "moved": 1 },
+      { "tech": "llm-quality-metrics", "ring": 1, "moved": 0 },
+      { "tech": "llm-as-judge-multi-model", "ring": 2, "moved": 0 },
+      { "tech": "architecture-decision-records-adrs", "ring": 0, "moved": 0 },
+      { "tech": "a2a-protocol-sdk", "ring": 2, "moved": 1 },
+      { "tech": "a2a-protocol-google", "ring": 2, "moved": 1 },
+      { "tech": "graphrag", "ring": 1, "moved": 1 },
+      { "tech": "gpt-5-4-databricks", "ring": 1, "moved": 1 },
+      { "tech": "python-3-14", "ring": 2, "moved": 1 },
+      { "tech": "mermaid", "ring": 1, "moved": 0 },
+      { "tech": "httpx-async-http-client", "ring": 1, "moved": 0 },
+      { "tech": "playwright", "ring": 2, "moved": 0 }
+    ],
+    "digital-it": [
+      { "tech": "gpt-4o-azure-openai", "ring": 0, "moved": 0 },
+      { "tech": "gpt-5-mini-azure-openai", "ring": 1, "moved": 1 },
+      { "tech": "claude-haiku-4-5-databricks", "ring": 2, "moved": 1 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "azure-key-vault", "ring": 0, "moved": 0 },
+      { "tech": "azure-container-apps", "ring": 0, "moved": 0 },
+      { "tech": "azure-functions", "ring": 0, "moved": 0 },
+      { "tech": "azure-cosmos-db", "ring": 0, "moved": 0 },
+      { "tech": "azure-devops-git-backlog-pipelines", "ring": 0, "moved": 0 },
+      { "tech": "docker", "ring": 0, "moved": 0 },
+      { "tech": "terraform-opentofu-4-0", "ring": 0, "moved": 0 },
+      { "tech": "application-insights", "ring": 0, "moved": 0 },
+      { "tech": "sap-erp", "ring": 0, "moved": 0 },
+      { "tech": "salesforce-crm", "ring": 0, "moved": 0 },
+      { "tech": "power-bi", "ring": 0, "moved": 0 },
+      { "tech": "python-3-11", "ring": 0, "moved": 0 },
+      { "tech": "typescript-5-strict", "ring": 0, "moved": 0 },
+      { "tech": "fastapi-uvicorn", "ring": 1, "moved": 0 },
+      { "tech": "mcp-model-context-protocol", "ring": 2, "moved": 1 },
+      { "tech": "opentelemetry-tracing", "ring": 0, "moved": 0 },
+      { "tech": "gitops-config-as-code", "ring": 0, "moved": 0 },
+      { "tech": "prompt-injection-detection", "ring": 1, "moved": 0 },
+      { "tech": "architecture-decision-records-adrs", "ring": 0, "moved": 0 },
+      { "tech": "tdd-red-green-refactor", "ring": 1, "moved": 0 },
+      { "tech": "azure-static-web-apps", "ring": 0, "moved": 0 },
+      { "tech": "azure-app-service-linux-node-22", "ring": 0, "moved": 0 },
+      { "tech": "azure-redis-cache", "ring": 0, "moved": 0 },
+      { "tech": "databricks-apps-bundles", "ring": 1, "moved": 0 },
+      { "tech": "vite-6", "ring": 1, "moved": 0 },
+      { "tech": "zod", "ring": 1, "moved": 0 },
+      { "tech": "mermaid", "ring": 1, "moved": 0 },
+      { "tech": "circuit-breaker-pattern", "ring": 0, "moved": 0 },
+      { "tech": "sse-streaming", "ring": 1, "moved": 0 },
+      { "tech": "playwright", "ring": 1, "moved": 0 },
+      { "tech": "httpx-async-http-client", "ring": 1, "moved": 0 }
+    ],
+    "finance-operations": [
+      { "tech": "gpt-4o-azure-openai", "ring": 1, "moved": 0 },
+      { "tech": "gpt-5-mini-azure-openai", "ring": 2, "moved": 1 },
+      { "tech": "sap-erp", "ring": 0, "moved": 0 },
+      { "tech": "power-bi", "ring": 0, "moved": 0 },
+      { "tech": "azure-ad-entra-id", "ring": 0, "moved": 0 },
+      { "tech": "azure-blob-storage", "ring": 0, "moved": 0 },
+      { "tech": "azure-data-factory", "ring": 0, "moved": 0 },
+      { "tech": "azure-synapse-analytics", "ring": 1, "moved": 0 },
+      { "tech": "azure-key-vault", "ring": 0, "moved": 0 },
+      { "tech": "python-3-11", "ring": 1, "moved": 0 },
+      { "tech": "pandas-numpy", "ring": 0, "moved": 0 },
+      { "tech": "structured-output-json-mode", "ring": 2, "moved": 1 },
+      { "tech": "rag-retrieval-augmented-generation", "ring": 3, "moved": 0 },
+      { "tech": "llm-usage-tracking", "ring": 2, "moved": 0 },
+      { "tech": "response-caching", "ring": 2, "moved": 0 },
+      { "tech": "gpt-4o-mini-azure-openai", "ring": 2, "moved": 0 },
+      { "tech": "circuit-breaker-pattern", "ring": 2, "moved": 0 },
+      { "tech": "manual-prompt-chaining", "ring": 3, "moved": 0 }
+    ]
+  }
+}
