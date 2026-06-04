@@ -121,7 +121,7 @@ Owns: the two business agents. Wrap A and B; do NOT modify them.
 - [x] Commit: `feat(mcp-agent): A2A wrapper for exercise B`
 
 ### P2.3 — Smoke test
-- [ ] Script that boots registry + both agents and round-trips one envelope to each. No orchestrator yet.
+- [x] Script that boots registry + both agents and round-trips one envelope to each. No orchestrator yet. (`python -m agents.smoke_test`)
 
 ### P2.4 — README contribution
 - [ ] One paragraph: what each agent does that the other can't (composition honesty).
