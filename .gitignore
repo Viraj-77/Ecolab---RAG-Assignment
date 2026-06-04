@@ -14,3 +14,10 @@ wheels/
 
 # DB
 chroma_db/
+*.db
+
+# Logs / pids
+logs/
+*.pid
+.DS_Store
+

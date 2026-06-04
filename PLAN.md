@@ -62,42 +62,42 @@ git push
 ```
 
 ### P1.1 — Envelope module (FIRST commit with real code)
-- [ ] `envelope/__init__.py` — Pydantic `Envelope` with: `correlation_id`, `causation_id`, `idempotency_key`, `sender`, `recipient`, `capability`, `payload`, `timestamp`.
-- [ ] One-line docstring per field.
-- [ ] Helper: `Envelope.reply_to(prev, payload)` that propagates correlation_id and sets causation_id.
-- [ ] Commit: `feat(envelope): typed message envelope`
+- [x] `envelope/__init__.py` — Pydantic `Envelope` with: `correlation_id`, `causation_id`, `idempotency_key`, `sender`, `recipient`, `capability`, `payload`, `timestamp`.
+- [x] One-line docstring per field.
+- [x] Helper: `Envelope.reply_to(prev, payload)` that propagates correlation_id and sets causation_id.
+- [x] Commit: `feat(envelope): typed message envelope`
 
 ### P1.2 — Registry service (`registry/`, port 8000)
-- [ ] `POST /register` — body: name, capabilities[], endpoint, health_url.
-- [ ] `DELETE /deregister/:name`.
-- [ ] `GET /agents?capability=...` — filter by capability.
-- [ ] `GET /health` — own health + aggregated per-agent.
-- [ ] Heartbeat: agents PUT `/heartbeat/:name` every 10s; entries TTL after 30s.
-- [ ] Persist agent table in memory (dict is fine; document the choice).
-- [ ] Commit: `feat(registry): register/deregister/query/health + TTL`
+- [x] `POST /register` — body: name, capabilities[], endpoint, health_url.
+- [x] `DELETE /deregister/:name`.
+- [x] `GET /agents?capability=...` — filter by capability.
+- [x] `GET /health` — own health + aggregated per-agent.
+- [x] Heartbeat: agents PUT `/heartbeat/:name` every 10s; entries TTL after 30s.
+- [x] Persist agent table in memory (dict is fine; document the choice).
+- [x] Commit: `feat(registry): register/deregister/query/health + TTL`
 
 ### P1.3 — Shared HTTP client (`envelope/client.py` or `common/`)
-- [ ] `send(envelope, endpoint, timeout=5)` — POSTs envelope, returns reply envelope.
-- [ ] Auto-retry once on timeout, **reuse same idempotency_key**.
-- [ ] Inject correlation/causation if missing.
+- [x] `send(envelope, endpoint, timeout=5)` — POSTs envelope, returns reply envelope.
+- [x] Auto-retry once on timeout, **reuse same idempotency_key**.
+- [x] Inject correlation/causation if missing.
 
 ### P1.4 — One-command boot
-- [ ] `docker-compose.yml` OR `Makefile` (`make up`) that starts: registry, orchestrator, rag-agent, mcp-agent.
-- [ ] `requirements.txt` per service.
+- [x] `docker-compose.yml` OR `Makefile` (`make up`) that starts: registry, orchestrator, rag-agent, mcp-agent.
+- [x] `requirements.txt` per service.
 
 ### P1.4b — Port helper scripts (`scripts/`)
-- [ ] `scripts/check-ports.sh` — checks 8000/8001/8002/8003. For each, prints `FREE` or `IN USE by PID <n> (<process name>)`. Exits non-zero if any are taken. Use `lsof -nP -iTCP:<port> -sTCP:LISTEN`.
-- [ ] `scripts/free-ports.sh` — lists what's on each port, prompts `Kill these? [y/N]`, then `kill <pid>` (SIGTERM, not -9 unless retry needed).
-- [ ] Make both executable (`chmod +x`). Document in README under "Troubleshooting".
-- [ ] Wire `check-ports.sh` into the Makefile's `up` target as a precondition.
-- [ ] Commit: `feat(scripts): port check + free helpers — P1.4b done`
+- [x] `scripts/check-ports.sh` — checks 8000/8001/8002/8003. For each, prints `FREE` or `IN USE by PID <n> (<process name>)`. Exits non-zero if any are taken. Use `lsof -nP -iTCP:<port> -sTCP:LISTEN`.
+- [x] `scripts/free-ports.sh` — lists what's on each port, prompts `Kill these? [y/N]`, then `kill <pid>` (SIGTERM, not -9 unless retry needed).
+- [x] Make both executable (`chmod +x`). Document in README under "Troubleshooting".
+- [x] Wire `check-ports.sh` into the Makefile's `up` target as a precondition.
+- [x] Commit: `feat(scripts): port check + free helpers — P1.4b done`
 
 ### P1.5 — README.md
-- [ ] Scenario + why each agent has a unique job (Person 2 contributes their paragraph).
-- [ ] Envelope spec (paste field defs verbatim, one sentence each).
-- [ ] Setup: `pip install -r requirements.txt` per service OR `docker compose up`.
-- [ ] Run: one command.
-- [ ] Mermaid sequence diagram of happy path.
+- [x] Scenario + why each agent has a unique job (Person 2 contributes their paragraph).
+- [x] Envelope spec (paste field defs verbatim, one sentence each).
+- [x] Setup: `pip install -r requirements.txt` per service OR `docker compose up`.
+- [x] Run: one command.
+- [x] Mermaid sequence diagram of happy path.
 
 ---
 
