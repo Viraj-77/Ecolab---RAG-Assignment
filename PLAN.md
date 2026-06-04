@@ -114,11 +114,11 @@ Owns: the two business agents. Wrap A and B; do NOT modify them.
 - [x] Idempotency: in-memory LRU(1000) on `idempotency_key` → cached reply.
 - [x] Commit: `feat(rag-agent): A2A wrapper for exercise A`
 
-### P2.2 — MCP agent (`agents/mcp-agent/`, port 8003)
-- [ ] FastAPI app. Capability `propose-radar-change`.
-- [ ] `POST /invoke` — accepts `Envelope`, calls into `exercise-b-mcp` (Variant 2 server) to edit the radar.
-- [ ] Same lifecycle (register/deregister/heartbeat) and idempotency dedupe.
-- [ ] Commit: `feat(mcp-agent): A2A wrapper for exercise B`
+### P2.2 — MCP agent (`agents/mcp_agent/`, port 8003)
+- [x] FastAPI app. Capability `propose-radar-change`.
+- [x] `POST /invoke` — accepts `Envelope`, calls into `exercise-b-mcp` (Variant 2 server) to edit the radar.
+- [x] Same lifecycle (register/deregister/heartbeat) and idempotency dedupe.
+- [x] Commit: `feat(mcp-agent): A2A wrapper for exercise B`
 
 ### P2.3 — Smoke test
 - [ ] Script that boots registry + both agents and round-trips one envelope to each. No orchestrator yet.
