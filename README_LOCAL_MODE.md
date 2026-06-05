@@ -24,7 +24,7 @@ The objective of this project is to build a practical RAG system that can:
 
 ### Local Ollama RAG Answer
 
-![Local mode RAG answer](docs/images/local-rag-output.png)
+![Local mode RAG answer](docs:images:local-rag-output.png)
 
 ### Azure RAG Answer
 
