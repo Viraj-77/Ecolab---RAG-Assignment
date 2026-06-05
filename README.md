@@ -10,7 +10,7 @@ Three agents compose a Tech Radar concierge: a local-RAG agent answers questions
 | Language | Python 3.11+ |
 | Branch | `Team/ExerciseC-ScenarioA` |
 
-See `PLAN.md` for the full team plan, ownership boundaries, and onboarding flow.
+
 
 ## Demo
 
@@ -201,24 +201,4 @@ Each of the three processes does something the other two **cannot** — that's t
 
 A monolithic agent that did all three jobs would lose: (a) the read/write blast-radius separation (a buggy retrieval prompt could no longer overwrite the radar), (b) the ability to scale or replace either side independently (swap the local Gemma model into `rag-agent` without touching the writer), and (c) the audit trail — today every cross-agent message is an envelope with a `correlation_id`, so the orchestrator's decision and the eventual radar mutation share one traceable timeline.
 
-## Status
 
-- [x] P1.0 Vendor exercise A and B
-- [x] P1.1 Envelope module
-- [x] P1.2 Registry service
-- [x] P1.3 Shared HTTP client
-- [x] P1.4 Makefile / one-command boot
-- [x] P1.4b Port helper scripts
-- [x] P1.5 README
-- [x] P2.1 RAG agent A2A wrapper (port 8002)
-- [x] P2.2 MCP agent A2A wrapper (port 8003)
-- [x] P2.3 Smoke test (`python -m agents.smoke_test`)
-- [x] P2.4 Composition paragraph (above)
-- [x] P3.1 Orchestrator + SQLite workflow engine
-- [x] P3.2 Failure handling (timeouts, retries with idempotency, poison)
-- [x] P3.3 Observability (`observability/logs.ndjson` + `query.py`)
-- [x] P3.4 Chaos test (`python -m orchestrator.chaos_test`)
-- [x] P3.5 Docs (`docs/topology-decision.md`, `observability-walkthrough.md`, `failure-modes.md`)
-- [x] P3.6 Demo recording — https://youtu.be/c4OpBx6Ctwo
-
-See `PLAN.md` for the full task list.
