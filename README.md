@@ -12,6 +12,10 @@ Three agents compose a Tech Radar concierge: a local-RAG agent answers questions
 
 See `PLAN.md` for the full team plan, ownership boundaries, and onboarding flow.
 
+## Demo
+
+Video walkthrough: https://youtu.be/c4OpBx6Ctwo
+
 ## Repo layout
 
 ```
@@ -43,11 +47,35 @@ Makefile              one-command boot
 
 ## Setup (one-time)
 
+Clone the repo, then create and activate a virtual environment before installing dependencies. The `Makefile` auto-detects `.venv/bin/uvicorn`, so once the venv exists `make up` works without re-activating it in new shells.
+
+**macOS / Linux**
+
 ```bash
+git clone https://github.com/Viraj-77/Ecolab---RAG-Assignment.git
+cd Ecolab---RAG-Assignment
+git checkout Team/ExerciseC-ScenarioA
+
 python3 -m venv .venv
 source .venv/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
+
+**Windows (PowerShell)**
+
+```powershell
+git clone https://github.com/Viraj-77/Ecolab---RAG-Assignment.git
+cd Ecolab---RAG-Assignment
+git checkout Team/ExerciseC-ScenarioA
+
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+To leave the venv later: `deactivate`.
 
 ## Run (one-command)
 
@@ -191,6 +219,6 @@ A monolithic agent that did all three jobs would lose: (a) the read/write blast-
 - [x] P3.3 Observability (`observability/logs.ndjson` + `query.py`)
 - [x] P3.4 Chaos test (`python -m orchestrator.chaos_test`)
 - [x] P3.5 Docs (`docs/topology-decision.md`, `observability-walkthrough.md`, `failure-modes.md`)
-- [ ] P3.6 Demo recording (out of scope for this Claude session)
+- [x] P3.6 Demo recording — https://youtu.be/c4OpBx6Ctwo
 
 See `PLAN.md` for the full task list.

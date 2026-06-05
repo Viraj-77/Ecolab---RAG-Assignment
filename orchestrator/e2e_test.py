@@ -81,7 +81,8 @@ async def _post_request(text: str, action: str | None = None,
     if action:
         body["action"] = action
         body["params"] = params or {}
-    async with httpx.AsyncClient(timeout=15.0) as client:
+    timeout = float(os.environ.get("E2E_HTTP_TIMEOUT", "120"))
+    async with httpx.AsyncClient(timeout=timeout) as client:
         r = await client.post(f"{ORCH_URL}/request", json=body)
         r.raise_for_status()
         return r.json()
@@ -98,7 +99,7 @@ async def _idempotency_check() -> bool:
         capability="answer-from-corpus",
         payload={"question": "idempotency probe"},
     )
-    async with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=float(os.environ.get("E2E_HTTP_TIMEOUT", "120"))) as client:
         r1 = await client.post(f"{RAG_URL}/invoke", json=env.model_dump())
         r1.raise_for_status()
         r2 = await client.post(f"{RAG_URL}/invoke", json=env.model_dump())

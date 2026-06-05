@@ -33,6 +33,7 @@ import httpx
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ORCH_URL = "http://localhost:8001"
+HTTP_TIMEOUT = float(os.environ.get("CHAOS_HTTP_TIMEOUT", "180"))
 REGISTRY_URL = "http://localhost:8000"
 RAG_URL = "http://localhost:8002"
 MCP_URL = "http://localhost:8003"
@@ -66,7 +67,9 @@ def _spawn(name: str, app_path: str, port: int) -> subprocess.Popen:
         stdout=log_path.open("w"),
         stderr=subprocess.STDOUT,
         env={**os.environ, "PYTHONUNBUFFERED": "1",
-             "ORCH_CALL_TIMEOUT": "1.5"},  # short timeout so chaos finishes fast
+             # Default short so chaos finishes fast; override (e.g. local Ollama
+             # cold-load takes ~6s) by exporting ORCH_CALL_TIMEOUT before running.
+             "ORCH_CALL_TIMEOUT": os.environ.get("ORCH_CALL_TIMEOUT", "1.5")},
     )
 
 
@@ -93,7 +96,7 @@ async def _run() -> dict:
     print("\n=== chaos test: kill rag-agent mid-flow ===\n")
 
     # 1. Sanity: a normal read works.
-    async with httpx.AsyncClient(timeout=10.0) as client:
+    async with httpx.AsyncClient(timeout=HTTP_TIMEOUT) as client:
         r = await client.post(f"{ORCH_URL}/request",
                               json={"text": "What is the radar?"})
         baseline = r.json()
@@ -128,7 +131,7 @@ def main() -> int:
         time.sleep(1.0)  # let the deregister POST land
 
         async def _fire(text: str) -> dict:
-            async with httpx.AsyncClient(timeout=30.0) as client:
+            async with httpx.AsyncClient(timeout=HTTP_TIMEOUT) as client:
                 r = await client.post(f"{ORCH_URL}/request", json={"text": text})
                 return r.json()
 
