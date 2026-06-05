@@ -1,3 +1,14 @@
+# Local RAG artifacts
+.env
+chroma_db/
+*.sqlite3
+*.db
+*.gguf
+
+# Ollama/model cache - do not commit model weights
+.ollama/
+models/
+
 # Python-generated files
 __pycache__/
 *.py[oc]
@@ -7,10 +18,8 @@ wheels/
 *.egg-info
 
 # Virtual environments
-.venv
+.venv/
 
-# env file
-.env
+# OS
+.DS_Store
 
-# DB
-chroma_db/
